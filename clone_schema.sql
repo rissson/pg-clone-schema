@@ -2539,7 +2539,7 @@ BEGIN
       -- Issue#76: Enable row security if indicated
       SELECT c.relrowsecurity INTO abool FROM pg_class c, pg_namespace n where n.nspname = quote_ident(arec.schemaname) AND n.oid = c.relnamespace AND c.relname = quote_ident(arec.tablename) and c.relkind = 'r';
       IF abool THEN
-        buffer = 'ALTER TABLE ' || dest_schema || '.' || arec.tablename || ' ENABLE ROW LEVEL SECURITY;';
+        buffer = 'ALTER TABLE ' || quote_ident(dest_schema) || '.' || quote_ident(arec.tablename) || ' ENABLE ROW LEVEL SECURITY;';
         IF bDDLOnly THEN
           RAISE INFO '%', buffer;
         ELSE
@@ -2568,7 +2568,7 @@ BEGIN
       -- Issue#76: Enable row security if indicated
       SELECT c.relrowsecurity INTO abool FROM pg_class c, pg_namespace n where n.nspname = quote_ident(arec.schemaname) AND n.oid = c.relnamespace AND c.relname = quote_ident(arec.tablename) and c.relkind = 'r';
       IF abool THEN
-        buffer = 'ALTER TABLE ' || dest_schema || '.' || arec.tablename || ' ENABLE ROW LEVEL SECURITY;';
+        buffer = 'ALTER TABLE ' || quote_ident(dest_schema) || '.' || quote_ident(arec.tablename) || ' ENABLE ROW LEVEL SECURITY;';
         IF bDDLOnly THEN
           RAISE INFO '%', buffer;
         ELSE
